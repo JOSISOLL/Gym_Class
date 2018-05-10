@@ -1,0 +1,14 @@
+<div class="row mt-5">
+    <div class="col-md-4 mb-3" *ngFor="let session of registerSessions">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">{{ session.name }}</h5>
+          <p class="card-text">{{session.description}}</p>
+          <a href="#" class="btn btn-success">Book Session</a>
+        </div>
+        <div class="card-footer text-muted">
+          {{ session.date }}
+        </div>
+      </div>
+    </div>
+  </div>
