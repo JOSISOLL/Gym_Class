@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,6 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = ' Gym Registration ';
+
+  constructor(private _authService: AuthService){}
 }

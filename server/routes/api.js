@@ -3,6 +3,7 @@ const router = express.Router()
 const User = require('../models/user')
 const Admin = require('../models/admin')
 const jwt = require('jsonwebtoken')
+const RSA_PRIVATE_KEY = "secret-key"
 
 
 const mongoose = require('mongoose')
@@ -20,6 +21,25 @@ mongoose.connect(db, err => {
 
 })
 
+function verifyToken(req, res, next){
+    if (!req.headers.authorization){
+        return res.status(401).send('Unauthorized request')
+    }
+    let token = req.headers.authorization.split(' ')[1]
+
+    if(token === 'null'){
+        return res.status(401).send('Unauthorized request')
+    }
+
+    let payload = jwt.verify(token, RSA_PRIVATE_KEY)
+    if(!payload){
+        return res.status(401).send('Unauthorized request')
+    }
+    req.userId = payload.subject
+    next()
+
+}
+
 router.get('/', (req, res) =>{
     res.send('Hello from API')
 })
@@ -32,7 +52,7 @@ router.post('/register', (req , res) => {
             console.log(error)
         } else {
             let payload = { subject: registeredUser._id }
-            let token = jwt.sign(payload, "secret-key")
+            let token = jwt.sign(payload, RSA_PRIVATE_KEY)
             res.status(200).send({token})
         }
     })
@@ -55,7 +75,7 @@ router.post('/login', (req, res) =>{
                     let payload = {
                         subject : user._id
                     }
-                    let token = jwt.sign(payload, 'secret-key')
+                    let token = jwt.sign(payload, RSA_PRIVATE_KEY)
                     res.status(200).send({token })
                 }
             }
@@ -78,7 +98,7 @@ router.post('/admin', (req, res) =>{
                     res.status(401).send("Invalid password")
                 } else {
                     let payload = { subject : admin._id }
-                    let token = jwt.sign(payload, 'secret-key')
+                    let token = jwt.sign(payload, RSA_PRIVATE_KEY)
                     res.status(200).send({token})
                 }
             }
@@ -216,7 +236,7 @@ router.get('/sessions' , (req, res) => {
 
 })
 
-router.get('/sessions/register' , (req, res) => {
+router.get('/sessions/register' , verifyToken, (req, res) => {
     let sessions = [
         {
             "_id" : "1",

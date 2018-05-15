@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
@@ -14,7 +14,9 @@ import { SessionsComponent } from './sessions/sessions.component';
 import { AuthService } from './auth.service';
 import { SessionService } from './session.service';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-
+import { AuthGuard } from './auth.guard';
+import { AdminGuard } from './admin-guard.guard';
+import { InterceptorService } from './interceptor.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,11 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, SessionService],
+  providers: [AuthService, SessionService, AuthGuard, AdminGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

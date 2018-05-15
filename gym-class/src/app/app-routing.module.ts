@@ -5,6 +5,9 @@ import { SessionRegisterComponent } from './session-register/session-register.co
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './register/register.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AuthGuard } from './auth.guard';
+import { AdminGuard } from './admin-guard.guard';
 
 const routes: Routes = [
     {
@@ -19,7 +22,8 @@ const routes: Routes = [
     },
     {
         path: 'sessions/register',
-        component: SessionRegisterComponent
+        component: SessionRegisterComponent,
+        canActivate :  [AuthGuard]
     },
     {
         path: 'login',
@@ -29,6 +33,11 @@ const routes: Routes = [
     {
         path: 'admin',
         component : AdminComponent
+    },
+    {
+        path: 'admin_panel',
+        component : AdminPanelComponent,
+        canActivate: [AdminGuard]
     },
     {
         path: 'register',

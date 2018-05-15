@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -9,7 +10,7 @@ import { AuthService } from '../auth.service';
 export class AdminComponent implements OnInit {
 
   adminLoginData = {}
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService, private _router: Router) { }
 
   ngOnInit() {
   }
@@ -17,7 +18,11 @@ export class AdminComponent implements OnInit {
   adminLogin(){
     this._auth.adminLogin(this.adminLoginData)
     .subscribe(
-      res => console.log(res),
+      res => {
+        localStorage.setItem('admin_token', res.token)
+        console.log(res)
+        this._router.navigate(['/admin_panel'])
+      },
       err => console.log(err)
     )
 
