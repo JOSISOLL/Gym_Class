@@ -17,6 +17,9 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AuthGuard } from './auth.guard';
 import { AdminGuard } from './admin-guard.guard';
 import { InterceptorService } from './interceptor.service';
+import { RegistrationComponent } from './registration/registration.component';
+import { RegService } from './reg.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,15 +29,17 @@ import { InterceptorService } from './interceptor.service';
     AdminComponent,
     SessionRegisterComponent,
     SessionsComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
-  providers: [AuthService, SessionService, AuthGuard, AdminGuard, {
+  providers: [AuthService, SessionService, AuthGuard, AdminGuard, RegService, {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true
