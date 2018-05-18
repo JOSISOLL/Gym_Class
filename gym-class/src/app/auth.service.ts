@@ -22,6 +22,9 @@ export class AuthService {
   adminLogin(admin){
     return this.http.post<any>(this._adminUrl,admin)
   }
+  userLoggedIn(){
+    return !!localStorage.getItem('token')
+  }
   loggedIn(){
     if (this.adminLoggedIn()){
       return !!localStorage.getItem('admin_token')

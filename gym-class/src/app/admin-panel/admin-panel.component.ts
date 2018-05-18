@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AddSessionService } from '../add-session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPanelComponent implements OnInit {
 
-  constructor() { }
+  sessionData = {}
+  constructor(private _addService: AddSessionService, private _router: Router) { }
 
   ngOnInit() {
+  }
+  
+  addSession(){
+
+    // console.log(this.sessionData) 
+    this._addService.addSession(this.sessionData)
+    .subscribe(
+      res =>{
+        console.log(res)
+      },
+      err => console.log(err)
+    )
   }
 
 }

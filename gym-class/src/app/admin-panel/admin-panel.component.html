@@ -1,3 +1,46 @@
-<p>
-  admin-panel works!
-</p>
+<div class="card mt-5">
+  <div class="card-header">
+    Add Session
+  </div>
+  <div class="card-body">
+    <form>
+      <div class="form-group ">
+        <label for="">Title</label>
+        <input [(ngModel)]="sessionData.title" type="text" class="form-control" name="title" placeholder="Title" required>
+      </div>
+      <div class="form-group">
+        <label for="">Description</label>
+        <textarea [(ngModel)]="sessionData.description" class="form-control" name="description" rows="3" required></textarea>
+      </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="">Time</label>
+        <select [(ngModel)]="sessionData.time" class="form-control" name="time" required>
+          <option>18:00 - 19:00</option>
+          <option>19:10 - 20:10</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="">Date</label>
+        <select [(ngModel)]="sessionData.day" name="date" class="form-control" required>
+          <option>Choose Weekday...</option>
+          <option>Monday</option>
+          <option>Tuesday</option>
+          <option>Wednesday</option>
+          <option>Thursday</option>
+          <option>Friday</option>
+          <option>Saturday</option>
+          <option>Sunday</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4 ">
+          <label for="no_of_people">Max. number of people</label>
+          <input [(ngModel)]="sessionData.max_people" type="text" class="form-control" name="max_people" placeholder="Max. No.">
+        </div>
+    </div>
+    <!-- <input [(ngModel)]="sessionData.createdAt" type="hidden" class="form-control" name="createdAt" [value]="createdAt"> -->
+    <button type="submit" class="btn btn-danger float-left">Cancel</button>
+    <button (click)="addSession()" type="submit" class="btn btn-primary float-right">Submit</button>
+    </form>
+  </div>
+</div>

@@ -20,6 +20,7 @@ import { InterceptorService } from './interceptor.service';
 import { RegistrationComponent } from './registration/registration.component';
 import { RegService } from './reg.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AddSessionService } from './add-session.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgbModule.forRoot()
   ],
-  providers: [AuthService, SessionService, AuthGuard, AdminGuard, RegService, {
+  providers: [AuthService, SessionService, AuthGuard, AdminGuard, RegService, AddSessionService, {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptorService,
     multi: true

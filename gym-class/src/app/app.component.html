@@ -10,7 +10,7 @@
                 <a class="nav-link" routerLink="/sessions" routerLinkActive="active">Sessions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/sessions/register" routerLinkActive="active">Booking</a>
+                <a class="nav-link" *ngIf="_authService.userLoggedIn()" routerLink="/sessions/register" routerLinkActive="active">Booking</a>
             </li>
         </ul>
         <ul class="navbar-nav">

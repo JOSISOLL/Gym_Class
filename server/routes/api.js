@@ -5,6 +5,7 @@ const Admin = require('../models/admin')
 const jwt = require('jsonwebtoken')
 const RSA_PRIVATE_KEY = "secret-key"
 const Reg = require('../models/registration')
+const Session = require('../models/session')
 
 
 const mongoose = require('mongoose')
@@ -55,6 +56,22 @@ router.post('/register', (req , res) => {
             let payload = { subject: registeredUser._id }
             let token = jwt.sign(payload, RSA_PRIVATE_KEY)
             res.status(200).send({token})
+        }
+    })
+
+})
+
+router.post('/session/add', (req, res) =>{
+    console.log("Trying to add a new session")
+    let sessionData = req.body
+    let session = new Session(sessionData)
+
+    session.save((error, addedSession) => {
+        if(error){
+            console.log(error)
+        } else {
+            res.status(200).send(addedSession)
+            console.log(addedSession.title + ' session successfully added!')
         }
     })
 
