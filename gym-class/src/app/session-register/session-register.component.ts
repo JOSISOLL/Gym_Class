@@ -11,12 +11,24 @@ import { Router } from '@angular/router';
 export class SessionRegisterComponent implements OnInit {
 
   registerSessions = []
+  todays_session = []
+  private today;
+  staticAlertClosed = false;
   constructor(private _sessionService: SessionService, private _router: Router) { }
 
   ngOnInit() {
+    this.today = new Date().toLocaleString('en-us', {  weekday: 'long' })
     this._sessionService.getRegisterSessions()
     .subscribe(
-      res => this.registerSessions = res,
+      res => {
+        this.registerSessions = res
+        for(let entry of this.registerSessions){
+          // console.log(entry)
+          if( entry.days === this.today){
+            this.todays_session.push(entry)
+          }
+        }
+      },
       err => {
         if (err instanceof HttpErrorResponse){
           if (err.status === 401){
@@ -25,6 +37,7 @@ export class SessionRegisterComponent implements OnInit {
         }
       }
     )
+    setTimeout(() => this.staticAlertClosed = true, 20000);
   }
 
 }

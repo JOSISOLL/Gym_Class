@@ -22,7 +22,7 @@ export class SessionsComponent implements OnInit {
           console.log(this.sessions.length)
           for(let entry of this.sessions){
             // console.log(entry)
-            if( entry.date === this.today){
+            if( entry.day === this.today){
               this.todays_session.push(entry)
             }
           }

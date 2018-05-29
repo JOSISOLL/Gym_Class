@@ -125,304 +125,43 @@ router.post('/admin', (req, res) =>{
 
 })
 
-router.get('/sessions' , (req, res) => {
-    let sessions = [
-        {
-            "_id" : "1",
-            "name": "Step Aerobics",
-            "description" : "Step Aerobics",
-            "date" : "Monday",
-            "time" : "18:00 - 19:00"
-        },
-        {
-            "_id" : "2",
-            "name": "Rmtha Yoga",
-            "description" : "Rmtha Yoga",
-            "date" : "Monday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "3",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Monday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "4",
-            "name": "Combined Training",
-            "description" : "Combined Training",
-            "date" : "Tuesday",
-            "time" : "18:00 - 19:00"
-        },
-        {
-            "_id" : "5",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Tuesday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "6",
-            "name": "Flow Yoga",
-            "description" : "Flow Yoga",
-            "date" : "Tuesday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "7",
-            "name": "Kick Boxing",
-            "description" : "Kick Boxing",
-            "date" : "Wednesday",
-            "time" : "18:00 - 19:00"
-        },
-        {
-            "_id" : "8",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Wednesday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "9",
-            "name": "Ashtanga Yoga",
-            "description" : "Ashtanga Yoga",
-            "date" : "Wednesday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "10",
-            "name": "Flow Yoga",
-            "description" : "Flow Yoga",
-            "date" : "Thursday",
-            "time" : "18:00 - 19:00"
-        },
-        {
-            "_id" : "11",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Thursday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "12",
-            "name": "Jazz",
-            "description" : "Jazz",
-            "date" : "Thursday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "13",
-            "name": "Pilates",
-            "description" : "Pilates",
-            "date" : "Friday",
-            "time" : "18:00 - 19:00"
-        },{
-            "_id" : "14",
-            "name": "Step Aerobics",
-            "description" : "Step Aerobics",
-            "date" : "Friday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "15",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Friday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "16",
-            "name": "Back Side Shaping",
-            "description" : "Back Side Shaping",
-            "date" : "Saturday",
-            "time" : "18:00 - 19:00"
-        },{
-            "_id" : "17",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Ssturday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "18",
-            "name": "Kick Boxing",
-            "description" : "Kick Boxing",
-            "date" : "Saturday",
-            "time" : "19:10 - 20:10"
-        },{
-            "_id" : "19",
-            "name": "Speed Reduction",
-            "description" : "Speed Reduction",
-            "date" : "Sunday",
-            "time" : "18:00 - 19:00"
-        },{
-            "_id" : "20",
-            "name": "Pilates",
-            "description" : "Pilates",
-            "date" : "Sunday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "21",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Sunday",
-            "time" : "19:10 - 20:10"
-        }
-]
-    res.json(sessions)
+// router.get('/sessions' , (req, res) => {
+//     let sessions = []
 
-})
+// })
 
 router.get('/sessions/register' , verifyToken, (req, res) => {
-    let sessions = [
-        {
-            "_id" : "1",
-            "name": "Step Aerobics",
-            "description" : "Step Aerobics",
-            "date" : "Monday",
-            "time" : "18:00 - 19:00"
-        },
-        {
-            "_id" : "2",
-            "name": "Rmtha Yoga",
-            "description" : "Rmtha Yoga",
-            "date" : "Monday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "3",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Monday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "4",
-            "name": "Combined Training",
-            "description" : "Combined Training",
-            "date" : "Tuesday",
-            "time" : "18:00 - 19:00"
-        },
-        {
-            "_id" : "5",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Tuesday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "6",
-            "name": "Flow Yoga",
-            "description" : "Flow Yoga",
-            "date" : "Tuesday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "7",
-            "name": "Kick Boxing",
-            "description" : "Kick Boxing",
-            "date" : "Wednesday",
-            "time" : "18:00 - 19:00"
-        },
-        {
-            "_id" : "8",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Wednesday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "9",
-            "name": "Ashtanga Yoga",
-            "description" : "Ashtanga Yoga",
-            "date" : "Wednesday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "10",
-            "name": "Flow Yoga",
-            "description" : "Flow Yoga",
-            "date" : "Thursday",
-            "time" : "18:00 - 19:00"
-        },
-        {
-            "_id" : "11",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Thursday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "12",
-            "name": "Jazz",
-            "description" : "Jazz",
-            "date" : "Thursday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "13",
-            "name": "Pilates",
-            "description" : "Pilates",
-            "date" : "Friday",
-            "time" : "18:00 - 19:00"
-        },{
-            "_id" : "14",
-            "name": "Step Aerobics",
-            "description" : "Step Aerobics",
-            "date" : "Friday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "15",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Friday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "16",
-            "name": "Back Side Shaping",
-            "description" : "Back Side Shaping",
-            "date" : "Saturday",
-            "time" : "18:00 - 19:00"
-        },{
-            "_id" : "17",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Ssturday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "18",
-            "name": "Kick Boxing",
-            "description" : "Kick Boxing",
-            "date" : "Saturday",
-            "time" : "19:10 - 20:10"
-        },{
-            "_id" : "19",
-            "name": "Speed Reduction",
-            "description" : "Speed Reduction",
-            "date" : "Sunday",
-            "time" : "18:00 - 19:00"
-        },{
-            "_id" : "20",
-            "name": "Pilates",
-            "description" : "Pilates",
-            "date" : "Sunday",
-            "time" : "19:10 - 20:10"
-        },
-        {
-            "_id" : "21",
-            "name": "Spinning Class",
-            "description" : "Spinning Class",
-            "date" : "Sunday",
-            "time" : "19:10 - 20:10"
+    Session.find(function (error, sessions){
+        if (error){
+            console.log(error)
+        } else {
+            res.json(sessions)
+            console.log("Sessions fetched from database")
         }
-]
-    res.json(sessions)
+    })
+})
+router.get('/sessions/registerd/:id', (req, res) => {
+    Reg.
+    Reg.findById(req.sessionId)
+    .then(regSessions => {
+        if(!regSessions){
+            res.status(401).end()
+        } else {
+            return res.status(200).json(regSessions)
+        }
 
+    })
+
+})
+router.get('/sessions/registerd', (req, res) =>{
+    Reg.find(function (error, regUsers){
+        if(error){
+            console.log(error)
+        } else {
+            res.json(regUsers)
+            console.log("Registered users for all sessions fetched from database")
+        }
+    })
 })
 
 // router.post('sessions_registration', (req, res) =>{
@@ -452,6 +191,30 @@ router.post('/sessions/registration', (req, res) =>{
         }
     })
 
+})
+
+router.post('/sessions/add', (req, res) => {
+    let sesData = req.body
+    session = new Session(sesData)
+    console.log('Admin attempting to add a session')
+    session.save((error, addedSession) =>{
+        if (error){
+            console.log(error)
+        } else{
+            res.status(200).send(regSession)
+        }
+    })
+})
+
+router.get('/sessions', (req, res) => {
+    Session.find(function (error, sessions){
+        if (error){
+            console.log(error)
+        } else {
+            res.json(sessions)
+            console.log("Sessions fetched from database")
+        }
+    })
 })
 
 module.exports = router

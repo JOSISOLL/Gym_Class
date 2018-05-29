@@ -21,6 +21,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { RegService } from './reg.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AddSessionService } from './add-session.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AddSessionService } from './add-session.service';
     SessionRegisterComponent,
     SessionsComponent,
     AdminPanelComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

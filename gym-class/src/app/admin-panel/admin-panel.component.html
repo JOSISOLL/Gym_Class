@@ -1,7 +1,51 @@
-<div class="card mt-5">
-  <div class="card-header">
-    Add Session
-  </div>
+<div class="mt-5">
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" class="mt-5">
+    <ngb-panel title="Today's Sessions">
+        <ng-template ngbPanelContent>
+            <div class="row">
+              <div class="col-md-4 mb-3" *ngFor="let session of todays_session">
+                <div class="card text-center">
+                  <div class="card-header">
+                      {{ session.title }} <a routerLink="" class="float-right"><i class="fa fa-trash"></i></a>
+                  </div>
+                  <div class="card-body">
+                    <!-- <h5 class="card-title">{{ session.name }}</h5> -->
+                    <p class="card-text">{{session.description}}</p>
+                    <a routerLink='' class="btn btn-primary">Bookings</a>   
+                    <p class="card-text">{{session.max_people}}</p>
+                  </div>
+                  <div class="card-footer text-muted">
+                    Date : {{ session.date }} --- Time : {{session.time}} 
+                  </div>
+                </div>
+              </div>
+            </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel title="See All Sessions">
+          <ng-template ngbPanelContent>
+              <div class="row">
+                <div class="col-md-4 mb-3" *ngFor="let session of sessions">
+                  <div class="card text-center">
+                    <div class="card-header">
+                        {{ session.title }} <a routerLink="" class="float-right"><i class="fa fa-trash"></i></a>
+                    </div>
+                    <div class="card-body">
+                      <!-- <h5 class="card-title">{{ session.name }}</h5> -->
+                      <p class="card-text">{{session.description}}</p>
+                      <a routerLink='/sessions/register' class="btn btn-primary">Bookings</a>
+                      <p class="card-text">{{session.max_people}}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                      Date : {{ session.date }} --- Time : {{session.time}} 
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </ng-template>
+        </ngb-panel>
+    <ngb-panel title="Add Session">
+      <ng-template ngbPanelContent>
   <div class="card-body">
     <form>
       <div class="form-group ">
@@ -43,4 +87,8 @@
     <button (click)="addSession()" type="submit" class="btn btn-primary float-right">Submit</button>
     </form>
   </div>
+
+</ng-template>
+</ngb-panel>
+</ngb-accordion>
 </div>

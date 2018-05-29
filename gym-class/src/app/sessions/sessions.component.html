@@ -6,12 +6,13 @@
             <div class="col-md-4 mb-3" *ngFor="let session of todays_session">
               <div class="card text-center">
                 <div class="card-header">
-                    {{ session.name }}
+                    {{ session.title }}
                 </div>
                 <div class="card-body">
                   <!-- <h5 class="card-title">{{ session.name }}</h5> -->
                   <p class="card-text">{{session.description}}</p>
                   <a routerLink='/sessions/register' class="btn btn-primary">Book Session</a>
+                  <p class="card-text">Allowed Spots : {{session.max_people}}</p>
                 </div>
                 <div class="card-footer text-muted">
                   Date : {{ session.date }} --- Time : {{session.time}}
@@ -27,15 +28,17 @@
               <div class="col-md-4 mb-3" *ngFor="let session of sessions">
                 <div class="card text-center">
                   <div class="card-header">
-                      {{ session.name }}
+                      {{ session.title }}
                   </div>
                   <div class="card-body">
                     <!-- <h5 class="card-title">{{ session.name }}</h5> -->
                     <p class="card-text">{{session.description}}</p>
                     <a routerLink='/sessions/register' class="btn btn-primary">Book Session</a>
+                    <p class="card-text">Allowed Spots : {{session.max_people}}</p>
                   </div>
                   <div class="card-footer text-muted">
-                    Date : {{ session.date }} --- Time : {{session.time}}
+                    Date : {{ session.day }} --- Time : {{session.time}}
+                    
                   </div>
                 </div>
               </div>

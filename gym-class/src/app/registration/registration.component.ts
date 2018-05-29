@@ -16,18 +16,28 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private _sessionService: SessionService, private _router: Router, private _regService: RegService) { }
   regData = {}
-  regSessions = {}
+  regSessions = []
 
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
+  todays_session = []
+  date : string
+  private today = new Date().toLocaleString('en-us', {  weekday: 'long' })
 
 
   ngOnInit() {
+    this.date = new Date().toLocaleString()
     this._sessionService.getRegisterSessions()
     .subscribe(
       res => {
         this.regSessions = res
+        for(let entry of this.regSessions){
+          // console.log(entry)
+          if( entry.date === this.today){
+            this.todays_session.push(entry)
+          }
+        }
       },
       err => {
         if (err instanceof HttpErrorResponse){
@@ -41,7 +51,7 @@ export class RegistrationComponent implements OnInit {
 
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
-      debounceTime(5000)
+      debounceTime(9000)
     ).subscribe(() => {this.successMessage = null,
       this._router.navigate(['/sessions'])});
 

@@ -1,13 +1,16 @@
+<h1 class="row mt-5">Todays's Sessions</h1>
+<ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">Welcome to registration! Make sure to cancel the booking one hour before the session starts or else you'll be balcklisted.</ngb-alert>
 <div class="row mt-5">
-    <div class="col-md-4 mb-3" *ngFor="let session of registerSessions">
+    <div class="col-md-4 mb-3" *ngFor="let session of todays_session">
       <div class="card text-center">
         <div class="card-body">
-          <h5 class="card-title">{{ session.name }}</h5>
+          <h5 class="card-title">{{ session.title }}</h5>
           <p class="card-text">{{session.description}}</p>
           <a routerLink="/sessions/registration" class="btn btn-success">Book Session</a>
+          <p class="card-text">Allowed Spots : {{session.max_people}}</p>
         </div>
         <div class="card-footer text-muted">
-            Date : {{ session.date }}  |  Time : {{session.time}}
+            Date : {{ session.day }}  |  Time : {{session.time}}
         </div>
       </div>
     </div>
