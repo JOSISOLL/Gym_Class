@@ -38,6 +38,9 @@ export class AuthService {
   getToken(){
     return localStorage.getItem('token')
   }
+  getAdminToken(){
+    return localStorage.getItem('admin_token')
+  }
   userLogout(){
     if(this.adminLoggedIn()){
       localStorage.removeItem('admin_token')

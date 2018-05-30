@@ -10,7 +10,7 @@
           <div class="form-group">
             <label for="" class="session"><span style="color:red;">*</span>Session</label>
             <select class="form-control rounded-0" [(ngModel)]="regData.sessionId" name="session" type="text" required>
-                <option  *ngFor="let sessions of todays_session" value="{{sessions._id}}">{{sessions.name}} - {{sessions.date}} - {{sessions.time}}</option>
+                <option  *ngFor="let sessions of todays_session" value="{{sessions._id}}">{{sessions.title}} - {{sessions.day}} - {{sessions.time}}</option>
               </select>
           </div>
           <div class="form-group">

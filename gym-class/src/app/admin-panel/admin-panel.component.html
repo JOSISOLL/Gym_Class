@@ -6,16 +6,16 @@
               <div class="col-md-4 mb-3" *ngFor="let session of todays_session">
                 <div class="card text-center">
                   <div class="card-header">
-                      {{ session.title }} <a routerLink="" class="float-right"><i class="fa fa-trash"></i></a>
+                      {{ session.title }} <a (click)="deleteSessionModal(session)" class="float-right"><i class="fa fa-trash"></i></a>
                   </div>
                   <div class="card-body">
                     <!-- <h5 class="card-title">{{ session.name }}</h5> -->
                     <p class="card-text">{{session.description}}</p>
-                    <a routerLink='' class="btn btn-primary">Bookings</a>   
-                    <p class="card-text">{{session.max_people}}</p>
+                    <a routerLink='' class="btn btn-primary">See Bookings</a>   
+                    <p class="card-text">Maximum Number of People : {{session.max_people}}</p>
                   </div>
                   <div class="card-footer text-muted">
-                    Date : {{ session.date }} --- Time : {{session.time}} 
+                    Date : {{ session.day }} --- Time : {{session.time}} 
                   </div>
                 </div>
               </div>
@@ -33,11 +33,11 @@
                     <div class="card-body">
                       <!-- <h5 class="card-title">{{ session.name }}</h5> -->
                       <p class="card-text">{{session.description}}</p>
-                      <a routerLink='/sessions/register' class="btn btn-primary">Bookings</a>
+                      <a routerLink='/sessions/register' class="btn btn-primary">See Bookings</a>
                       <p class="card-text">{{session.max_people}}</p>
                     </div>
                     <div class="card-footer text-muted">
-                      Date : {{ session.date }} --- Time : {{session.time}} 
+                      Date : {{ session.day }} --- Time : {{session.time}} 
                     </div>
                   </div>
                 </div>
@@ -92,3 +92,25 @@
 </ngb-panel>
 </ngb-accordion>
 </div>
+<div id="modal-view-part" class="modal" tabindex="-1" >
+    <div class="modal-dialog" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+              <span class="label label-danger" aria-hidden="true">&times;</span>
+          </button> -->
+          <h3 class="modal-title float-left">Delete Confirmation</h3>
+        </div>
+        <div class="modal-body"> 
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">Are you sure you want to delete <b> {{selectedData.title}}</b>?</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)=deleteSessionById(selectedData._id) data-dismiss="modal"><span class="label label-primary">Yes</span></button><button type="button" class="btn btn-secondary" data-dismiss="modal"><span class="label label-secondary">Close</span></button>
+        </div>
+      </div>
+    </div>
+  </div>

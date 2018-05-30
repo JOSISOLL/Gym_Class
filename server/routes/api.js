@@ -4,6 +4,7 @@ const User = require('../models/user')
 const Admin = require('../models/admin')
 const jwt = require('jsonwebtoken')
 const RSA_PRIVATE_KEY = "secret-key"
+const Admin_RSA_PRIVATE_KEY = "admin-secret-key"
 const Reg = require('../models/registration')
 const Session = require('../models/session')
 
@@ -34,6 +35,24 @@ function verifyToken(req, res, next){
     }
 
     let payload = jwt.verify(token, RSA_PRIVATE_KEY)
+    if(!payload){
+        return res.status(401).send('Unauthorized request')
+    }
+    req.userId = payload.subject
+    next()
+
+}
+function adminVerifyToken(req, res, next){
+    if (!req.headers.authorization){
+        return res.status(401).send('Unauthorized request')
+    }
+    let token = req.headers.authorization.split(' ')[1]
+
+    if(token === 'null'){
+        return res.status(401).send('Unauthorized request')
+    }
+
+    let payload = jwt.verify(token, Admin_RSA_PRIVATE_KEY)
     if(!payload){
         return res.status(401).send('Unauthorized request')
     }
@@ -125,11 +144,6 @@ router.post('/admin', (req, res) =>{
 
 })
 
-// router.get('/sessions' , (req, res) => {
-//     let sessions = []
-
-// })
-
 router.get('/sessions/register' , verifyToken, (req, res) => {
     Session.find(function (error, sessions){
         if (error){
@@ -140,21 +154,44 @@ router.get('/sessions/register' , verifyToken, (req, res) => {
         }
     })
 })
-router.get('/sessions/registerd/:id', (req, res) => {
-    Reg.
-    Reg.findById(req.sessionId)
-    .then(regSessions => {
-        if(!regSessions){
-            res.status(401).end()
-        } else {
-            return res.status(200).json(regSessions)
-        }
 
+router.delete('/sessions/delete/:id', (req, res) => {
+    Session.findOneAndRemove({_id : req.params.id}, function (err,data){
+        if(err){
+            console.log(err)
+        } else {
+            if(!data){
+                status = "This session doesn't exist."
+                res.status(401).send({status: status})
+
+            }else{
+                console.log(data)
+            }
+            
+        }
+    } )
+    
+
+})
+router.get('/sessions/registerd/:id',verifyToken, (req, res) => {
+    console.log(req.params)
+    Reg.find({sessionId : req.params.id}, (error, sessions) =>{
+
+        if( error ){
+            console.log(error)
+        } else {
+            if(!sessions){
+                res.status(401).send("No one has registered for this session yet.")
+            } else {
+                res.status(200).send(sessions)                
+            }
+        }
     })
+    
 
 })
 router.get('/sessions/registerd', (req, res) =>{
-    Reg.find(function (error, regUsers){
+    Reg.find({},function (error, regUsers){
         if(error){
             console.log(error)
         } else {
@@ -178,7 +215,7 @@ router.get('/sessions/registerd', (req, res) =>{
 //     res.status(200).send("Works perfect")
 // })
 
-router.post('/sessions/registration', (req, res) =>{
+router.post('/sessions/registration', verifyToken, (req, res) =>{
     
     let regData = req.body
     reg = new Reg(regData)
@@ -208,6 +245,16 @@ router.post('/sessions/add', (req, res) => {
 
 router.get('/sessions', (req, res) => {
     Session.find(function (error, sessions){
+        if (error){
+            console.log(error)
+        } else {
+            res.json(sessions)
+            console.log("Sessions fetched from database")
+        }
+    })
+})
+router.get('/sessions/:id', verifyToken, (req, res) => {
+    Session.findById(req.id, req.body, function (error, sessions){
         if (error){
             console.log(error)
         } else {

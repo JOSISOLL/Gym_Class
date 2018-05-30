@@ -34,7 +34,7 @@ export class RegistrationComponent implements OnInit {
         this.regSessions = res
         for(let entry of this.regSessions){
           // console.log(entry)
-          if( entry.date === this.today){
+          if( entry.day === this.today){
             this.todays_session.push(entry)
           }
         }
