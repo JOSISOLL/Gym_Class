@@ -71,10 +71,11 @@ export class AdminPanelComponent implements OnInit {
     .subscribe(
       res =>{
         console.log("Session deleted successfully")
+        this.pageRefresh()
       },
       err => console.log(err)
     )
-    this.pageRefresh()
+    
   }
   pageRefresh() {
     location.reload();
