@@ -263,5 +263,22 @@ router.get('/sessions/:id', verifyToken, (req, res) => {
         }
     })
 })
+router.put('/session/update', (req, res) => {
+    console.log("attempting to update session");
+    let sessionData = req.body; 
+    console.log("client_id  " + sessionData.id);
+    Session.findByIdAndUpdate(sessionData.id, 
+        {
+            title: sessionData.title, 
+            description: sessionData.description, 
+            time: sessionData.time, 
+            day: sessionData.day, 
+            max_people: sessionData.max_people
+        }, {new: true}, function(err, model){
+            console.log("update executed...");
+            console.log(model);
+        });
+    res.status(200).send({"success": true}); 
+});
 
 module.exports = router

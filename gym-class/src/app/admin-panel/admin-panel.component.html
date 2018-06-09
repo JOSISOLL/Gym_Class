@@ -6,7 +6,7 @@
               <div class="col-md-4 mb-3" *ngFor="let session of todays_session">
                 <div class="card text-center">
                   <div class="card-header">
-                      {{ session.title }} <a (click)="deleteSessionModal(session)" class="float-right"><i class="fa fa-trash"></i></a>
+                    <a  (click)="editSessionModal(session)" class="float-left"><i class="fa fa-edit"></i></a> {{ session.title }} <a (click)="deleteSessionModal(session)" class="float-right"><i class="fa fa-trash"></i></a>
                   </div>
                   <div class="card-body">
                     <!-- <h5 class="card-title">{{ session.name }}</h5> -->
@@ -28,8 +28,8 @@
                 <div class="col-md-4 mb-3" *ngFor="let session of sessions">
                   <div class="card text-center">
                     <div class="card-header">
-                        {{ session.title }} <a routerLink="" class="float-right"><i class="fa fa-trash"></i></a>
-                    </div>
+                      <a  (click)="editSessionModal(session)" class="float-left"><i class="fa fa-edit"></i></a> {{ session.title }} <a (click)="deleteSessionModal(session)" class="float-right"><i class="fa fa-trash"></i></a>
+                  </div>
                     <div class="card-body">
                       <!-- <h5 class="card-title">{{ session.name }}</h5> -->
                       <p class="card-text">{{session.description}}</p>
@@ -92,14 +92,14 @@
 </ngb-panel>
 </ngb-accordion>
 </div>
-<div id="modal-view-part" class="modal" tabindex="-1" >
+<div id="modal-view-session" class="modal" tabindex="-1" >
     <div class="modal-dialog" >
       <div class="modal-content">
         <div class="modal-header">
-          <!-- <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
-              <span class="label label-danger" aria-hidden="true">&times;</span>
-          </button> -->
           <h3 class="modal-title float-left">Delete Confirmation</h3>
+          <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+            <span class="label label-danger" aria-hidden="true">&times;</span>
+        </button>
         </div>
         <div class="modal-body"> 
           <div class="container-fluid">
@@ -114,3 +114,113 @@
       </div>
     </div>
   </div>
+
+
+  <!--Edit Modal-->
+  
+<div id="modal-edit-session" class="modal" tabindex="-1" >
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title float-left">Edit Session</h3>
+        <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- <form [formGroup]="myForm" (ngSubmit)="saveUpdates()" novalidate>
+        <input type="hidden" formControlName="id"/>
+        <div class="modal-body">
+          <div class="col-sm-12">
+            <table>
+              <tbody>
+                <tr>
+                  <td>Title</td>
+                  <td>
+                    <input class="form-control" formControlName="title" type="text" required/>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Description</td>
+                    <td>
+                      <input class="form-control" formControlName="description" type="text" required/>
+                    </td>
+                </tr>
+                <tr>
+                  <td>Time</td>
+                    <td>
+                      <input class="form-control" formControlName="time"  type="text"/>
+                    </td>
+                </tr>
+                <tr>
+                  <td>Day</td>
+                    <td>
+                      <input class="form-control" formControlName="day"  type="text"/>
+                    </td>
+                </tr>
+                <tr>
+                  <td>Max. Number of People</td>
+                  <td>
+                    <input class="form-control" formControlName="max_people"  type="text"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-outline">Save changes</button>
+        </div>
+      </form>  -->
+      <form [formGroup]="myForm" (ngSubmit)="saveUpdates()" novalidate>
+        <input type="hidden" formControlName="id"/>
+        <div class="modal-body">
+          <div class="col-sm-12">
+              <table>
+                  <tbody>
+                    <tr>
+                      <td>Title</td>
+                      <td>
+                        <input class="form-control" formControlName="title" type="text" required/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Description</td>
+                        <td>
+                          <input class="form-control" formControlName="description" type="text" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>Time</td>
+                        <td>
+                          <select class="form-control" formControlName="time"  type="text">
+                              <option>18:00 - 19:00</option>
+                              <option>19:10 - 20:10</option>
+                          </select>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>Day</td>
+                        <td>
+                          <input class="form-control" formControlName="day"  type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>Max. Number of People</td>
+                      <td>
+                        <input class="form-control" formControlName="max_people"  type="text"/>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-outline">Save changes</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+    

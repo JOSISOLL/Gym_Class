@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type' : 'application/json'})
+};
 
 @Injectable()
 export class SessionService {
@@ -9,6 +12,7 @@ export class SessionService {
   private _sessionRegisterUrl = "http://localhost:3000/api/sessions/register";
   private _sessionAdduUrl = "http://localhost:3000/api/sessions/add";
   private _sessionDeleteUrl = "http://localhost:3000/api/sessions/delete/";
+  private _urlUpdateSession = "http://localhost:3000/api/session/update";
 
 
   constructor(private http: HttpClient) { }
@@ -26,6 +30,9 @@ export class SessionService {
   deleteSession(id : string){
     console.log(this._sessionDeleteUrl.concat(id))
     return this.http.delete<any>(this._sessionDeleteUrl.concat(id))
+  }
+  updateSession(session: any){
+    return this.http.put<any>(this._urlUpdateSession, session, httpOptions); 
   }
 
 
