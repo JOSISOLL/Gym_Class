@@ -6,7 +6,8 @@
         <h3 class="mb-0">Session Booking</h3>
       </div>
       <div class="card-body">
-        <form class="form">
+        <!-- <form class="form">
+          
           <div class="form-group">
             <label for="" class="session"><span style="color:red;">*</span>Session</label>
             <select class="form-control rounded-0" [(ngModel)]="regData.sessionId" name="session" type="text" required>
@@ -21,10 +22,27 @@
             <label for="" class="phonenumber"><span style="color:red;">*</span>Phone Number</label>
             <input [(ngModel)]="regData.phonenumber" name="phonenumber" type="text" class="form-control rounded-0" required>
           </div>
-          <!-- <div class="form-group">
-            <input name="" class="form-control" [(ngModel)]="regData.regDate" value="{{date}}" readonly>
-          </div> -->
+          
+          <input type="hidden" [(ngModel)]="regData.regDate" [value]="date" name="date"/>
           <button  *ngIf="!successMessage" (click)="registration()" type="button" class="btn btn-primary float-right">Book Session</button>
+        </form> -->
+        <form [formGroup]="myForm" (ngSubmit)="registration()" novalidate>
+            <input type="hidden" formControlName="regDate" [ngModel]="date"/>
+            <div class="form-group">
+                <label for="" class="session"><span style="color:red;">*</span>Session</label>
+                <select class="form-control rounded-0" formControlName="sessionId" type="text" required>
+                    <option  *ngFor="let sessions of todays_session" value="{{sessions._id}}">{{sessions.title}} - {{sessions.day}} - {{sessions.time}}</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                <label for="" class="username"><span style="color:red;">*</span>Username</label>
+                <input formControlName="username" type="text" class="form-control rounded-0" required>
+              </div>
+              <div class="form-group">
+                <label for="" class="phonenumber"><span style="color:red;">*</span>Phone Number</label>
+                <input formControlName="phonenumber" type="text" class="form-control rounded-0" required>
+              </div>
+              <button  *ngIf="!successMessage" type="submit" class="btn btn-primary float-right">Book Session</button>
         </form>
         <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
       </div>
