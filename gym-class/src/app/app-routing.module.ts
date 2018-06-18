@@ -9,6 +9,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AuthGuard } from './auth.guard';
 import { AdminGuard } from './admin-guard.guard';
 import { RegistrationComponent } from './registration/registration.component';
+import { RegisteredUsersComponent } from './registered-users/registered-users.component';
 
 const routes: Routes = [
     {
@@ -47,6 +48,11 @@ const routes: Routes = [
     {
         path: 'sessions/registration',
         component: RegistrationComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'registered/users',
+        component: RegisteredUsersComponent,
         canActivate: [AuthGuard]
     }
 ];

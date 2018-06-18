@@ -144,7 +144,7 @@ router.post('/admin', (req, res) =>{
 
 })
 
-router.get('/sessions/register' , verifyToken, (req, res) => {
+router.get('/sessions/register' , (req, res) => {
     Session.find(function (error, sessions){
         if (error){
             console.log(error)
@@ -280,5 +280,4 @@ router.put('/session/update', (req, res) => {
         });
     res.status(200).send({"success": true}); 
 });
-
 module.exports = router

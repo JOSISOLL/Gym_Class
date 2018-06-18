@@ -11,7 +11,7 @@
                   <div class="card-body">
                     <!-- <h5 class="card-title">{{ session.name }}</h5> -->
                     <p class="card-text">{{session.description}}</p>
-                    <a routerLink='' class="btn btn-primary">See Bookings</a>   
+                    <a (click)="seeBookingbtnClick(session)" class="btn btn-primary">See Bookings</a>   
                     <p class="card-text">Maximum Number of People : {{session.max_people}}</p>
                   </div>
                   <div class="card-footer text-muted">
@@ -32,9 +32,9 @@
                   </div>
                     <div class="card-body">
                       <!-- <h5 class="card-title">{{ session.name }}</h5> -->
-                      <p class="card-text">{{session.description}}</p>
-                      <a routerLink='/sessions/register' class="btn btn-primary">See Bookings</a>
-                      <p class="card-text">{{session.max_people}}</p>
+                      <p class="card-text">Description : {{session.description}}</p>
+                      <!-- <a routerLink='/sessions/register' class="btn btn-primary">See Bookings</a> -->
+                      <p class="card-text">Maximum Allowed Spots : {{session.max_people}}</p>
                     </div>
                     <div class="card-footer text-muted">
                       Date : {{ session.day }} --- Time : {{session.time}} 
@@ -231,4 +231,41 @@
     </div>
   </div>
 </div>
-    
+
+
+<!-- View Modal-->
+<div class="modal modal-success fade" id="modal-view">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">Registered Users Detail</h4>
+        <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        
+      </div>
+      <div class="modal-body"> 
+        <div class="container-fluid">
+        <table class="table dt-responsive table-bordered">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Phone Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let entry of reg">
+              <td>{{entry.username}}</td>
+              <td>{{entry.phonenumber}}</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

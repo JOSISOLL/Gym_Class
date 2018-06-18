@@ -22,6 +22,7 @@ import { RegService } from './reg.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AddSessionService } from './add-session.service';
 import { HomeComponent } from './home/home.component';
+import { RegisteredUsersComponent } from './registered-users/registered-users.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { HomeComponent } from './home/home.component';
     SessionsComponent,
     AdminPanelComponent,
     RegistrationComponent,
-    HomeComponent
+    HomeComponent,
+    RegisteredUsersComponent
   ],
   imports: [
     BrowserModule,

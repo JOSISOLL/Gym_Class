@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AddSessionService } from '../add-session.service';
 import { Router } from '@angular/router';
 import { SessionService } from '../session.service';
+import { RegService } from '../reg.service';
 import { Location } from '@angular/common';
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
@@ -23,21 +24,26 @@ export class AdminPanelComponent implements OnInit {
   day: FormControl; 
   max_people: FormControl; 
 
+  regUsers = []
   sessionData = {}
   sessions = []
   todays_session = []
+  todays_regUsers = []
   selectedData = []
+  reg = []
   selsectedSession :any;
   session_id : string
   deleteStatus : string
   redirectUrl : string
-  private today = new Date().toLocaleString('en-us', {  weekday: 'long' })
-  constructor(private _addService: AddSessionService, private _router: Router, private _sessionService: SessionService, private location : Location) { }
+  private today = new Date().toLocaleString('en-us', {  weekday: 'long' });
+  private regDay = new Date().toLocaleDateString('nb-no', {year: "numeric", month : "2-digit", day : "numeric"})
+  constructor(private _addService: AddSessionService, private _router: Router, private _sessionService: SessionService, private location : Location, private _regService : RegService) { }
 
   ngOnInit() {
     this.fetchSessions()
     this.createControls(); 
     this.createEditForm(); 
+    this.getRegUsers();
     
   }
   createControls(){
@@ -60,7 +66,30 @@ export class AdminPanelComponent implements OnInit {
 
   }
 
-
+  getRegUsers(){
+    this._regService.getRegUsers()
+    .subscribe(
+      res => {
+        if(res){
+          this.regUsers = res
+          // console.log(this.regUsers)
+          for(let entry of this.regUsers){
+            // console.log(entry)
+            var day = entry.regDate.split('T')[0]
+            if( day.split('-').reverse().join('/') === this.regDay.split('.').join('/')){
+              // console.log(entry)
+              this.todays_regUsers.push(entry);
+            }
+            
+            // console.log(day.split('-').reverse().join('/'))
+            // console.log(this.regDay.split('.').join('/'))
+            // console.log(new Date().getDay())
+          }
+        }
+      },
+      err => console.log(err)
+    )    
+  }
 
   addSession(){
     // console.log(this.sessionData) 
@@ -68,7 +97,7 @@ export class AdminPanelComponent implements OnInit {
     .subscribe(
       res =>{
           if(res){
-          console.log(res)
+          // console.log(res)
           this.pageRefresh()
         }
       },
@@ -80,7 +109,7 @@ export class AdminPanelComponent implements OnInit {
   deleteSessionModal(data){
     this.selectedData = data
     $("#modal-view-session").modal("show");
-    console.log(this.selectedData)
+    // console.log(this.selectedData)
   }
   deleteSessionById(id){
     this.session_id = id
@@ -114,6 +143,21 @@ export class AdminPanelComponent implements OnInit {
         err => console.log(err)
       )
 }
+seeBookingbtnClick(data : any){
+  // console.log("See booking clicked");
+  var checked_reg = []
+  this.selectedData = data;
+  // console.log(this.selectedData._id)
+  for(let entry of this.todays_regUsers){
+    if(entry.sessionId === this.selectedData._id){
+      // console.log(entry)
+      checked_reg.push(entry)
+    }
+  }
+  this.reg = checked_reg
+  $("#modal-view").modal('show');
+
+}
 editSessionModal(data : any){
   this.selectedData = data
   this.myForm.setValue({
@@ -145,4 +189,5 @@ saveUpdates(){
     this.pageRefresh()
   }
 } 
+
 }
